@@ -57,10 +57,19 @@ namespace Deylin.Utils.ApplicationContext
                 result = (TData)this.ConfigurationData.FirstOrDefault(d => d.Key == settings.Name).Value;
                 if (result == null)
                 {
-                    result = (TData)settings.Manager.GetConfigurationData();
-                    if (!this.ConfigurationData.TryAdd(settings.Name, result))
+                    var jsonmngr = settings.Manager;
+                    jsonmngr.OnException += (obj, exc) => this.OnException?.Invoke(obj, exc);
+                    result = (TData)jsonmngr.GetConfigurationData();
+                    if(result == null)
                     {
-                        this.OnException?.Invoke(this, new Exception($"Could not add data '{settings.Name}' to configuration dictionary!"));
+                        return default(TData);
+                    }
+                    else
+                    {
+                        if (!this.ConfigurationData.TryAdd(settings.Name, result))
+                        {
+                            this.OnException?.Invoke(this, new Exception($"Could not add data '{settings.Name}' to configuration dictionary!"));
+                        }
                     }
                 }
 
@@ -160,7 +169,7 @@ namespace Deylin.Utils.ApplicationContext
             {
                 if (disposing)
                 {
-
+                    this.ConfigurationData?.Clear();
                 }
                 disposedValue = true;
             }

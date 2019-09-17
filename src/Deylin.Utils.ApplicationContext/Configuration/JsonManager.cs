@@ -73,7 +73,7 @@ namespace Deylin.Utils.ApplicationContext.Configuration
             }
             catch (Exception exc)
             {
-                this.ExceptionHandler(this, exc);
+                base.ExceptionHandler(this, exc);
                 return default(TData);
             }
         }

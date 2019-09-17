@@ -6,6 +6,8 @@
 
 namespace Deylin.Utils.ApplicationContext.Configuration
 {
+    using System;
+
     /// <summary>
     /// Interface for configuration managers
     /// </summary>
@@ -23,5 +25,10 @@ namespace Deylin.Utils.ApplicationContext.Configuration
         /// Property indicating whether the configuration has loaded or not
         /// </summary>
         bool IsConfigurationLoaded { get; }
+
+        /// <summary>
+        /// The event handler delegate for exceptions
+        /// </summary>
+        event EventHandler<Exception> OnException;
     }
 }
