@@ -9,6 +9,7 @@ namespace Deylin.Utils.ApplicationContext
     using Deylin.Utils.ApplicationContext.Configuration;
     using Deylin.Utils.ApplicationContext.Logging;
     using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -17,7 +18,7 @@ namespace Deylin.Utils.ApplicationContext
         /// <summary>
         /// Dictionary with all configuration data
         /// </summary>
-        private Dictionary<string, IData> ConfigurationData { get; set; }
+        private ConcurrentDictionary<string, IData> ConfigurationData { get; set; }
 
         private NLog.Logger currentlogger;
 
@@ -39,7 +40,7 @@ namespace Deylin.Utils.ApplicationContext
         /// </summary>
         private Current()
         {
-            this.ConfigurationData = new Dictionary<string, IData>();
+            this.ConfigurationData = new ConcurrentDictionary<string, IData>();
         }
 
         /// <summary>
@@ -53,13 +54,13 @@ namespace Deylin.Utils.ApplicationContext
             try
             {
                 TData result = default(TData);
-                lock (this.ConfigurationData)
+                result = (TData)this.ConfigurationData.FirstOrDefault(d => d.Key == settings.Name).Value;
+                if (result == null)
                 {
-                    result = (TData)this.ConfigurationData.FirstOrDefault(d => d.Key == settings.Name).Value;
-                    if (result == null)
+                    result = (TData)settings.Manager.GetConfigurationData();
+                    if (!this.ConfigurationData.TryAdd(settings.Name, result))
                     {
-                        result = (TData)settings.Manager.GetConfigurationData();
-                        this.ConfigurationData.Add(settings.Name, result);
+                        this.OnException?.Invoke(this, new Exception($"Could not add data '{settings.Name}' to configuration dictionary!"));
                     }
                 }
 
