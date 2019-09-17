@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\Data.cs" />
+    <Compile Include="Configuration\Settings2.cs" />
     <Compile Include="Configuration\Settings.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
