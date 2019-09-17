@@ -1,0 +1,10 @@
+{
+  "Guid": "2964204F-0041-47FF-BA16-D7D4220B6EB5",
+  "ApplicationName": "Deylin.Utils.ApplicationContext.UnitTests",
+  "Environment": "Development",
+  "Release": "LocalRelease",
+  "Version": "1.2.3.4",
+  "TestClass": {
+    "TestString": "qwerty"
+  }
+}

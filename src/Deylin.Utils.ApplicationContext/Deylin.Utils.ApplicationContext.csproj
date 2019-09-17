@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;NET45;NET451;NET452;NET46;NET461;NET462;NET47;NET471;NET472;NET48</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Company>Deylin</Company>
+    <Authors>Barry de Boer</Authors>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="config.json.pp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="config.json.pp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuration\Data.cs.pp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuration\Settings.cs.pp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="NLog" Version="4.6.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="app.config.transform">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Deylin.Utils.ApplicationContext.targets" Pack="True" PackagePath="build\Deylin.Utils.ApplicationContext.targets" />
+  </ItemGroup>
+  
+</Project>
