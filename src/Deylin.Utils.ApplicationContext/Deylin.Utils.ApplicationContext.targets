@@ -5,17 +5,12 @@
     <ConfigFile Include="config.json"/>
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="$(RootNameSpace).json"></None>
-    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+   <ItemGroup>
+    <Content Include="config.json"
+              Link="$(RootNameSpace)%(Extension)"
+              CopyToOutputDirectory="CopyAlways"
+              Visible="False"
+              Condition="Exists('config.json')" />
   </ItemGroup>
-  
-  <!--
-  <Target Name="CopyConfigFile" AfterTargets="Build;Rebuild">
-    <Copy SourceFiles="@(ConfigFile)" DestinationFiles ="@(ConfigFile->'$(OutDir)\$(RootNameSpace)%(Extension)')" />
-  </Target>
-  -->
-  <Target Name="CopyConfigFile" AfterTargets="">
-    <Copy SourceFiles="@(ConfigFile)" DestinationFiles ="@(ConfigFile->'$(RootNameSpace)%(Extension)')" />
-  </Target>
+
 </Project>

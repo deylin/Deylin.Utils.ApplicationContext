@@ -27,9 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="app.config.transform">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -38,5 +35,5 @@
   <ItemGroup>
     <None Include="Deylin.Utils.ApplicationContext.targets" Pack="True" PackagePath="build\Deylin.Utils.ApplicationContext.targets" />
   </ItemGroup>
-  
+ 
 </Project>
