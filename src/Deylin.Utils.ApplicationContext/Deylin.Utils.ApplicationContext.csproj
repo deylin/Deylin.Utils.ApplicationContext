@@ -7,6 +7,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="config.json.pp" />
+    <None Remove="NLog.config" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +20,9 @@
     <Content Include="Configuration\Settings.cs.pp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -27,13 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="NLog.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="Deylin.Utils.ApplicationContext.targets" Pack="True" PackagePath="build\Deylin.Utils.ApplicationContext.targets" />
   </ItemGroup>
- 
+  
 </Project>

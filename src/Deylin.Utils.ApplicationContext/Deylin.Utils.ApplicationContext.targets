@@ -2,15 +2,13 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <ItemGroup>
-    <ConfigFile Include="config.json"/>
-  </ItemGroup>
-
-   <ItemGroup>
-    <Content Include="config.json"
-              Link="$(RootNameSpace)%(Extension)"
-              CopyToOutputDirectory="CopyAlways"
-              Visible="False"
-              Condition="Exists('config.json')" />
+    <Content Include="config.json">
+      <Link>$(RootNameSpace)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
